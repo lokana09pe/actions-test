@@ -1,0 +1,14 @@
+name: Test Action
+
+# 手動で「実行ボタン」を押せるようにする設定
+on:
+  workflow_dispatch:
+
+jobs:
+  say-hello:
+    runs-on: ubuntu-latest
+    steps:
+      - name: ロボットに挨拶させる
+        run: |
+          echo "GitHub Actions のテストが成功しました！"
+          echo "クラウド上でプログラムが正常に動いています。"
