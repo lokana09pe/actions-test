@@ -1,0 +1,15 @@
+name: Discord Notification Test
+
+on:
+  workflow_dispatch: # 手動実行ボタン
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Discordにメッセージを送信
+        run: |
+          curl -H "Content-Type: application/json" \
+               -X POST \
+               -d '{"content": "🔔 GitHub Actionsからのテスト通知です！正常にBOTが動作しました！"}' \
+               https://discord.com/api/webhooks/1551500158578204795/REWJQc8zR2BWc6JnG7bi97fS3Wkp0d2Nzuz_LKLcBnCEQidrobRdyyuMC4EovaV2vDdw
