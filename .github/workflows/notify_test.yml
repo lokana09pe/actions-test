@@ -1,26 +1,22 @@
-name: Discord 10-Times Notification Test
+name: Auto Notify Every 6min
 
 on:
+  # 6分ごとに自動起動するタイマー設定
+  schedule:
+    - cron: '*/6 * * * *'
+  
+  # 手動でも動かせるようにボタンも残しておく
   workflow_dispatch:
 
 jobs:
-  notify-loop:
+  auto-notify:
     runs-on: ubuntu-latest
     steps:
-      - name: 10秒おきに10回送信
+      - name: 通知を送信
         run: |
           WEBHOOK_URL="https://discord.com/api/webhooks/1551500158578204795/REWJQc8zR2BWc6JnG7bi97fS3Wkp0d2Nzuz_LKLcBnCEQidrobRdyyuMC4EovaV2vDdw" # ← あなたのDiscord URL
-
-          for i in {1..10}
-          do
-            echo "送信中: $i / 10 回目"
-            curl -H "Content-Type: application/json" \
-                 -X POST \
-                 -d "{\"content\": \"🔔 テスト通知 ($i / 10回目)\"}" \
-                 $WEBHOOK_URL
-            
-            # 最後の1回以外は10秒待つ
-            if [ $i -lt 10 ]; then
-              sleep 10
-            fi
-          done
+          
+          curl -H "Content-Type: application/json" \
+               -X POST \
+               -d '{"content": "⏰ [自動タイマー起動] 6分ごとの定期パトロールです！"}' \
+               $WEBHOOK_URL
